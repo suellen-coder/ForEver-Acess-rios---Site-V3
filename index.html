@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="google-site-verification" content="2jxCyaB1Ys_3Q5GFqbXbo-tcISFJnmaedyaHIGXTx4A" />
+<meta
+        name="description"
+        content="Acessórios modernos e versáteis em aço inox. Conheça colares, brincos e pulseiras da Forever Acessórios."
+    >
+
+    <meta name="robots" content="index, follow">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ForEver Acessórios </title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<link href="css/store-admin-theme.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet"/>
+<script src="js/catalogo.js" type="module"></script><script src="js/script.js" type="module"></script>
+
+<!-- Forever: ícones e WebApp -->
+<link rel="icon" href="/midia/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/midia/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/midia/icons/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/midia/icons/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#4b0d0d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Forever">
+</head>
+<body>
+<header>
+<nav class="navbar">
+<a class="nav-logo" href="#">
+<img alt="ForEver Acessórios Logo" class="logo-image" src="midia/logos/L1b.png"/>
+</a>
+<ul class="nav-menu">
+<button class="fas fa-times" id="menu-close-button"></button>
+<li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
+<li class="nav-item"><a class="nav-link" href="#catalogo">Catálogo</a></li>
+<li class="nav-item"><a class="nav-link" href="#como-comprar">Como Comprar</a></li>
+<li class="nav-item"><a class="nav-link" href="#sobre-nos">Sobre Nós</a></li>
+</ul>
+<button aria-label="Abrir carrinho" class="nav-carrinho" id="cart-open-button" type="button">
+<img alt="Carrinho" src="https://img.icons8.com/?size=100&amp;id=3686&amp;format=png&amp;color=D9D9D9"/>
+<span class="cart-counter" id="cart-counter">0</span>
+</button>
+<button class="fas fa-bars" id="menu-open-button"></button>
+</nav>
+</header>
+<section class="video-container" id="inicio">
+<video autoplay="" class="video-bg" controlslist="nodownload nofullscreen noremoteplayback" disablepictureinpicture="" id="heroVideo" loop="" muted="" playsinline="" preload="metadata">
+<source src="midia/wlppr.mp4" type="video/mp4"/>
+        Seu navegador não suporta vídeos HTML5.
+    </video>
+<div class="content">
+<h1 class="text">Sua nova loja favorita <br/> de acessórios!</h1>
+<p class="sub">Acessórios que acompanham seus momentos, valorizam sua beleza e permanecem impecáveis por muito mais tempo</p>
+<a class="btn-catalogo" href="#catalogo">Acesse nosso catálogo digital!</a>
+</div>
+</section>
+<section class="catalogo" id="catalogo">
+<div class="container">
+<h2 class="title">Nosso Catálogo</h2>
+<p class="catalog-status" id="catalog-status">Carregando produtos...</p>
+<div id="dynamic-catalog"></div>
+</div>
+<div aria-hidden="true" class="product-preview" id="dynamic-product-preview"></div>
+</section>
+<section class="institutional-section how-to-buy-section" id="como-comprar">
+<div class="institutional-container">
+<div class="section-heading">
+<span class="section-eyebrow">Compra simples e segura</span>
+<h2>Como comprar</h2>
+<p>Escolha seus acessórios favoritos e conclua seu pedido em poucos passos.</p>
+</div>
+<div class="purchase-steps">
+<article class="purchase-step">
+<span class="step-number">01</span>
+<div class="step-icon"><i class="fa-solid fa-gem"></i></div>
+<h3>Escolha seus acessórios</h3>
+<p>Navegue pelo catálogo, confira os detalhes e selecione os produtos que combinam com você.</p>
+</article>
+<article class="purchase-step">
+<span class="step-number">02</span>
+<div class="step-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+<h3>Adicione ao carrinho</h3>
+<p>Defina a quantidade desejada e revise os itens antes de continuar para a finalização.</p>
+</article>
+<article class="purchase-step">
+<span class="step-number">03</span>
+<div class="step-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+<h3>Preencha seus dados</h3>
+<p>Informe entrega ou retirada, endereço quando necessário e escolha a forma de pagamento.</p>
+</article>
+<article class="purchase-step">
+<span class="step-number">04</span>
+<div class="step-icon"><i class="fa-brands fa-whatsapp"></i></div>
+<h3>Confirme pelo WhatsApp</h3>
+<p>O pedido será preparado automaticamente para confirmação e atendimento pelo WhatsApp.</p>
+</article>
+</div>
+<div class="purchase-info-card">
+<div>
+<span class="section-eyebrow">Antes de finalizar</span>
+<h3>Revise seu pedido com tranquilidade</h3>
+<p>Confira produtos, quantidades, forma de recebimento e valor total. Nossa equipe confirmará os próximos passos pelo WhatsApp.</p>
+</div>
+<a class="institutional-button" href="#catalogo">Ver catálogo</a>
+</div>
+</div>
+</section>
+<section class="institutional-section about-section" id="sobre-nos">
+<div class="institutional-container about-grid">
+<div aria-hidden="true" class="about-visual">
+<div class="about-logo-card">
+<img alt="" src="midia/logos/L2b.PNG"/>
+</div>
+<span class="about-detail about-detail-one"></span>
+<span class="about-detail about-detail-two"></span>
+</div>
+<div class="about-content">
+<span class="section-eyebrow">Sobre a Forever</span>
+<h2>Acessórios pensados para acompanhar todos os seus momentos</h2>
+<p>A Forever Acessórios nasceu para oferecer peças modernas, versáteis e feitas para quem não abre mão de estilo e durabilidade.</p>
+<p>Selecionamos acessórios em aço inox com atenção aos detalhes, buscando unir beleza, praticidade e um atendimento próximo em cada compra.</p>
+<div class="about-values">
+<div class="about-value">
+<i class="fa-solid fa-shield-heart"></i>
+<div>
+<strong>Qualidade</strong>
+<span>Peças selecionadas com cuidado.</span>
+</div>
+</div>
+<div class="about-value">
+<i class="fa-solid fa-star"></i>
+<div>
+<strong>Estilo</strong>
+<span>Designs para diferentes ocasiões.</span>
+</div>
+</div>
+<div class="about-value">
+<i class="fa-solid fa-comments"></i>
+<div>
+<strong>Proximidade</strong>
+<span>Atendimento direto e humanizado.</span>
+</div>
+</div>
+</div>
+<a class="institutional-button institutional-button-light" href="https://wa.me/5585998729885" rel="noopener noreferrer" target="_blank">
+                    Falar com a Forever
+                </a>
+</div>
+</div>
+</section>
+<footer class="site-footer">
+<div class="footer-container">
+<a aria-label="Voltar ao início" class="footer-brand" href="#inicio">
+<img alt="Forever Acessórios" src="midia/logos/L1b.PNG"/>
+</a>
+<nav aria-label="Navegação do rodapé" class="footer-links">
+<a href="#inicio">Início</a>
+<a href="#catalogo">Catálogo</a>
+<a href="#como-comprar">Como comprar</a>
+<a href="#sobre-nos">Sobre nós</a>
+</nav>
+<a class="footer-whatsapp" href="https://wa.me/5585998729885" rel="noopener noreferrer" target="_blank">
+<i class="fa-brands fa-whatsapp"></i>
+                Atendimento pelo WhatsApp
+            </a>
+</div>
+<div class="footer-bottom">
+<p>© 2026 Forever Acessórios. Todos os direitos reservados.</p>
+</div>
+</footer>
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside aria-hidden="true" aria-label="Carrinho de compras" class="cart-sidebar" id="cart-sidebar">
+<div class="cart-header">
+<h2>Seu carrinho</h2>
+<button aria-label="Fechar carrinho" class="cart-close-button fas fa-times" id="cart-close-button" type="button"></button>
+</div>
+<div class="cart-items" id="cart-items">
+<!-- Os produtos serão inseridos pelo JavaScript -->
+</div>
+<div class="cart-footer">
+<div class="cart-subtotal">
+<span>Subtotal</span>
+<strong id="cart-subtotal">R$ 0,00</strong>
+</div>
+<button class="cart-checkout-button" disabled="" id="cart-checkout-button" type="button">
+            Finalizar compra
+        </button>
+</div>
+</aside>
+</body>
+</html>

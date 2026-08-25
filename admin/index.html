@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forever Admin V2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/admin.css">
+
+  <!-- Forever Admin: ícones e WebApp -->
+  <link rel="icon" href="/midia/icons/admin/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/midia/icons/admin/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/midia/icons/admin/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/midia/icons/admin/apple-touch-icon.png">
+  <link rel="manifest" href="/admin/admin-manifest.json">
+  <meta name="theme-color" content="#4b0d0d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Forever Admin">
+</head>
+<body>
+  <div id="app-loader" class="app-loader"><div class="loader-mark">F</div><p>Carregando Forever Admin...</p></div>
+
+  <main id="login-view" class="login-view" hidden>
+    <section class="login-panel">
+      <div class="login-visual">
+        <img src="../midia/logos/L2b.PNG" alt="Forever Acessórios">
+        <div><span class="kicker">Forever Acessórios</span><h1>Gestão simples.<br>Decisões melhores.</h1><p>Controle produtos, estoque, pedidos e resultados em um único painel.</p></div>
+      </div>
+      <div class="login-form-wrap">
+        <div class="login-mobile-logo"><img src="../midia/logos/L1b.png" alt="Forever Acessórios"></div>
+        <span class="kicker">Acesso restrito</span><h2>Bem-vindo de volta</h2><p class="muted">Entre com o usuário administrador cadastrado no Firebase.</p>
+        <form id="login-form" class="form-stack" novalidate>
+          <label><span>E-mail</span><input id="login-email" type="email" autocomplete="email" required placeholder="admin@forever.com"></label>
+          <label><span>Senha</span><div class="password-field"><input id="login-password" type="password" autocomplete="current-password" minlength="6" required placeholder="Sua senha"><button id="toggle-password" class="icon-button" type="button">◉</button></div></label>
+          <p id="login-message" class="form-message" role="alert"></p>
+          <button id="login-button" class="primary-button" type="submit">Entrar no painel</button>
+        </form>
+        <a class="store-link" href="../index.html">← Voltar para a loja</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="admin-view" class="admin-shell" hidden>
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-brand"><img src="../midia/logos/L1b.PNG" alt="Forever Acessórios"><button id="close-sidebar" class="icon-button mobile-only">✕</button></div>
+      <div class="workspace"><span>Loja ativa</span><strong>Forever Acessórios</strong><small><i></i> Operação online</small></div>
+      <nav class="sidebar-nav">
+        <p>Visão geral</p>
+        <button class="nav-item active" data-view="dashboard"><span>⌂</span> Dashboard</button>
+        <p>Operação</p>
+        <button class="nav-item" data-view="pedidos"><span>▤</span> Pedidos <b id="pending-nav-count">0</b></button>
+        <button class="nav-item" data-view="produtos"><span>◇</span> Produtos</button>
+        <button class="nav-item" data-view="estoque"><span>▦</span> Estoque</button>
+        <button class="nav-item" data-view="clientes"><span>♙</span> Clientes</button>
+        <p>Inteligência</p>
+        <button class="nav-item" data-view="financeiro"><span>◒</span> Financeiro</button>
+        <button class="nav-item" data-view="configuracoes"><span>⚙</span> Configurações</button>
+      </nav>
+      <div class="sidebar-footer"><a href="../index.html" target="_blank">Abrir loja ↗</a><button id="logout-button" class="ghost-button">Sair</button></div>
+    </aside>
+    <div id="sidebar-overlay" class="sidebar-overlay" hidden></div>
+
+    <section class="admin-main">
+      <header class="topbar">
+        <div class="topbar-left"><button id="open-sidebar" class="icon-button mobile-only">☰</button><div><span class="kicker">Forever Acessórios</span><h1 id="page-title">Dashboard</h1></div></div>
+        <div class="topbar-tools"><label class="global-search"><span>⌕</span><input id="global-search" placeholder="Buscar no painel..."></label><button id="theme-button" class="icon-button">◐</button><div class="user-chip"><span class="avatar">F</span><div><strong>Administrador</strong><small id="user-email"></small></div></div></div>
+      </header>
+
+      <div class="content-area">
+        <section id="dashboard-section" class="view-section">
+          <div class="welcome-card"><div><span class="kicker">Resumo da operação</span><h2>Olá! Aqui está o que merece sua atenção hoje.</h2><p id="dashboard-date"></p></div><button class="secondary-button" id="refresh-dashboard">Atualizar dados</button></div>
+          <div class="metric-grid">
+            <article class="metric-card"><span class="metric-icon">R$</span><div><p>Receita confirmada</p><strong id="metric-revenue">R$ 0,00</strong><small>Pedidos não cancelados</small></div></article>
+            <article class="metric-card"><span class="metric-icon">▤</span><div><p>Pedidos</p><strong id="metric-orders">0</strong><small id="metric-pending">0 aguardando</small></div></article>
+            <article class="metric-card"><span class="metric-icon">◇</span><div><p>Produtos</p><strong id="metric-products">0</strong><small id="metric-units">0 unidades em estoque</small></div></article>
+            <article class="metric-card alert"><span class="metric-icon">!</span><div><p>Atenção no estoque</p><strong id="metric-low">0</strong><small id="metric-empty">0 esgotados</small></div></article>
+          </div>
+          <div class="dashboard-grid">
+            <article class="panel-card chart-card"><div class="panel-header"><div><h3>Receita por período</h3><p>Últimos 7 dias</p></div></div><div id="revenue-chart" class="revenue-chart"></div></article>
+            <article class="panel-card"><div class="panel-header"><div><h3>Pedidos recentes</h3><p>Últimas movimentações</p></div><button class="text-button" data-go-view="pedidos">Ver todos</button></div><div id="recent-orders" class="compact-list"></div></article>
+            <article class="panel-card"><div class="panel-header"><div><h3>Estoque crítico</h3><p>Itens com até 2 unidades</p></div><button class="text-button" data-go-view="estoque">Gerenciar</button></div><div id="attention-list" class="compact-list"></div></article>
+            <article class="panel-card"><div class="panel-header"><div><h3>Visão do estoque</h3><p>Distribuição por situação</p></div></div><div class="donut-wrap"><div id="stock-donut" class="donut"><span id="stock-donut-total">0</span></div><div class="legend"><span><i class="ok"></i>Disponível <b id="stock-available">0</b></span><span><i class="warn"></i>Baixo <b id="stock-low">0</b></span><span><i class="danger"></i>Esgotado <b id="stock-empty">0</b></span></div></div></article>
+          </div>
+        </section>
+
+        <section id="pedidos-section" class="view-section" hidden>
+          <div class="section-heading"><div><h2>Pedidos</h2><p>Acompanhe cada venda do recebimento à entrega.</p></div><div class="heading-actions"><button id="new-order-button" class="primary-button">+ Novo pedido</button><button id="export-orders" class="secondary-button">Exportar CSV</button></div></div>
+          <div class="filter-row panel-card compact"><label class="search-box"><span>⌕</span><input id="orders-search" placeholder="Buscar cliente, cidade ou pedido..."></label><select id="orders-filter"><option value="all">Todos os status</option><option value="novo">Novo</option><option value="confirmado">Confirmado</option><option value="separando">Separando</option><option value="enviado">Enviado</option><option value="entregue">Entregue</option><option value="cancelado">Cancelado</option></select></div>
+          <div id="orders-grid" class="orders-grid"></div><div id="orders-empty" class="empty-state" hidden>Nenhum pedido encontrado.</div>
+        </section>
+
+        <section id="produtos-section" class="view-section" hidden>
+          <div class="section-heading"><div><h2>Produtos</h2><p>Cadastre informações comerciais e mantenha o catálogo organizado.</p></div><div class="heading-actions"><button id="import-catalog-button" class="secondary-button">Importar catálogo atual</button><button id="new-product-button" class="primary-button">+ Novo produto</button></div></div>
+          <div class="filter-row panel-card compact"><label class="search-box"><span>⌕</span><input id="products-search" placeholder="Buscar nome ou SKU..."></label><select id="products-filter"><option value="all">Todas as categorias</option><option value="Anéis">Anéis</option><option value="Berloques">Berloques</option><option value="Brincos">Brincos</option><option value="Colares">Colares</option><option value="Pulseiras">Pulseiras</option><option value="Outros">Outros</option></select></div>
+          <div id="products-grid" class="products-grid"></div><div id="products-empty" class="empty-state" hidden>Nenhum produto cadastrado.</div>
+        </section>
+
+        <section id="estoque-section" class="view-section" hidden>
+          <div class="section-heading"><div><h2>Estoque</h2><p>Atualização em tempo real com o Firestore.</p></div><button id="initialize-stock-button" class="secondary-button">Completar cadastro-base</button></div>
+          <div class="filter-row panel-card compact"><label class="search-box"><span>⌕</span><input id="stock-search" placeholder="Buscar por código..."></label><select id="stock-filter"><option value="all">Todos</option><option value="available">Disponíveis</option><option value="low">Estoque baixo</option><option value="empty">Esgotados</option></select></div>
+          <div class="table-card"><div class="table-scroll"><table><thead><tr><th>Código</th><th>Nome da peça</th><th>Categoria</th><th>Quantidade</th><th>Status</th><th></th></tr></thead><tbody id="stock-table-body"></tbody></table></div><div id="stock-empty-state" class="empty-state" hidden>Nenhum item encontrado.</div></div>
+        </section>
+
+        <section id="clientes-section" class="view-section" hidden>
+          <div class="section-heading"><div><h2>Clientes</h2><p>Base construída automaticamente a partir dos pedidos.</p></div></div>
+          <div class="metric-grid small"><article class="metric-card"><span class="metric-icon">♙</span><div><p>Clientes únicos</p><strong id="clients-total">0</strong></div></article><article class="metric-card"><span class="metric-icon">↻</span><div><p>Clientes recorrentes</p><strong id="clients-repeat">0</strong></div></article><article class="metric-card"><span class="metric-icon">R$</span><div><p>Ticket médio</p><strong id="clients-ticket">R$ 0,00</strong></div></article></div>
+          <div class="table-card"><div class="table-scroll"><table><thead><tr><th>Cliente</th><th>Telefone</th><th>Cidade</th><th>Pedidos</th><th>Total gasto</th><th>Última compra</th></tr></thead><tbody id="clients-table-body"></tbody></table></div></div>
+        </section>
+
+        <section id="financeiro-section" class="view-section" hidden>
+          <div class="section-heading"><div><h2>Financeiro</h2><p>Controle completo de entradas, saídas e investimentos da Forever.</p></div><button id="new-finance-button" class="primary-button">+ Nova movimentação</button></div>
+          <div class="metric-grid finance-metrics">
+            <article class="metric-card"><span class="metric-icon">R$</span><div><p>Saldo atual</p><strong id="finance-balance">R$ 0,00</strong><small>Movimentações pagas</small></div></article>
+            <article class="metric-card"><span class="metric-icon">↗</span><div><p>Entradas</p><strong id="finance-income">R$ 0,00</strong><small>Inclui vendas válidas</small></div></article>
+            <article class="metric-card alert"><span class="metric-icon">↘</span><div><p>Saídas</p><strong id="finance-expenses">R$ 0,00</strong><small>Despesas operacionais</small></div></article>
+            <article class="metric-card"><span class="metric-icon">◇</span><div><p>Investimentos</p><strong id="finance-investments">R$ 0,00</strong><small>Estoque, marketing e expansão</small></div></article>
+            <article class="metric-card"><span class="metric-icon">◷</span><div><p>Pendentes</p><strong id="finance-pending">R$ 0,00</strong><small id="finance-pending-count">0 movimentações</small></div></article>
+          </div>
+          <div class="finance-summary-grid">
+            <article class="panel-card"><div class="panel-header"><div><h3>Resumo do período</h3><p>Resultado financeiro consolidado</p></div></div><div id="finance-summary-list" class="status-finance-list"></div></article>
+            <article class="panel-card"><div class="panel-header"><div><h3>Distribuição das saídas</h3><p>Principais categorias</p></div></div><div id="finance-category-list" class="status-finance-list"></div></article>
+          </div>
+          <div class="filter-row panel-card compact finance-filters">
+            <label class="search-box"><span>⌕</span><input id="finance-search" placeholder="Buscar descrição ou categoria..."></label>
+            <select id="finance-type-filter"><option value="all">Todos os tipos</option><option value="entrada">Entradas</option><option value="saida">Saídas</option><option value="investimento">Investimentos</option></select>
+            <select id="finance-status-filter"><option value="all">Todos os status</option><option value="pago">Pago/Recebido</option><option value="pendente">Pendente</option></select>
+          </div>
+          <div class="table-card"><div class="table-scroll"><table><thead><tr><th>Data</th><th>Descrição</th><th>Categoria</th><th>Tipo</th><th>Pagamento</th><th>Status</th><th>Valor</th><th></th></tr></thead><tbody id="finance-table-body"></tbody></table></div><div id="finance-empty" class="empty-state" hidden>Nenhuma movimentação cadastrada.</div></div>
+        </section>
+
+        <section id="configuracoes-section" class="view-section" hidden>
+          <div class="section-heading"><div><h2>Configurações</h2><p>Informações gerais da operação.</p></div></div>
+          <form id="settings-form" class="settings-grid"><article class="panel-card"><h3>Dados da loja</h3><div class="form-stack"><label><span>Nome da loja</span><input id="setting-store-name" value="Forever Acessórios"></label><label><span>WhatsApp</span><input id="setting-whatsapp" value="5585998729885"></label><label><span>Instagram</span><input id="setting-instagram" placeholder="@foreveracessorios"></label></div></article><article class="panel-card"><h3>Preferências</h3><div class="form-stack"><label><span>Limite para estoque baixo</span><input id="setting-low-stock" type="number" min="1" value="2"></label><label><span>Mensagem interna</span><textarea id="setting-note" rows="5" placeholder="Observações da operação..."></textarea></label><button class="primary-button" type="submit">Salvar configurações</button></div></article></form>
+        </section>
+      </div>
+    </section>
+  </div>
+
+  <div id="product-modal" class="modal" hidden><div class="modal-backdrop" data-close-modal></div><form id="product-form" class="modal-card"><div class="modal-header"><div><span class="kicker">Catálogo</span><h2 id="product-modal-title">Novo produto</h2></div><button type="button" class="icon-button" data-close-modal>✕</button></div><div class="form-grid"><label><span>SKU</span><input id="product-sku" required placeholder="FB019"></label><label><span>Nome</span><input id="product-name" required></label><label><span>Categoria</span><select id="product-category"><option>Anéis</option><option>Berloques</option><option>Brincos</option><option>Colares</option><option>Pulseiras</option><option>Outros</option></select></label><label><span>Preço</span><input id="product-price" type="number" min="0" step="0.01" required></label><label><span>Preço promocional</span><input id="product-promo-price" type="number" min="0" step="0.01" placeholder="Opcional"></label><label><span>Estoque</span><input id="product-stock" type="number" min="0" step="1" value="0" required></label><label><span>Ordem</span><input id="product-order" type="number" min="0" step="1" value="0"></label><label><span>Material</span><input id="product-material" placeholder="Ex.: Aço inox"></label><label><span>Cor</span><input id="product-color" placeholder="Ex.: Prata"></label><label class="full"><span>Imagem do produto</span><input id="product-image-file" type="file" accept="image/png,image/jpeg,image/webp"><small class="field-help">Escolha uma foto JPG, PNG ou WebP. Ela será enviada ao Firebase Storage.</small></label><div class="full image-upload-preview"><img id="product-image-preview" alt="Prévia da imagem" hidden><span id="product-image-preview-empty">Nenhuma imagem selecionada</span></div><label class="full"><span>URL ou caminho da imagem</span><input id="product-image" placeholder="Preenchido automaticamente após o upload"></label><label class="full"><span>Descrição</span><textarea id="product-description" rows="4"></textarea></label><label class="full"><span>Tags</span><input id="product-tags" placeholder="novo, delicado, presente"></label><label class="switch-row"><input id="product-active" type="checkbox" checked><span>Produto ativo</span></label><label class="switch-row"><input id="product-featured" type="checkbox"><span>Produto em destaque</span></label></div><p id="product-form-message" class="form-message"></p><div class="modal-actions"><button type="button" class="ghost-button" data-close-modal>Cancelar</button><button class="primary-button" type="submit">Salvar produto</button></div></form></div>
+
+  <div id="order-modal" class="modal" hidden><div class="modal-backdrop" data-close-order-modal></div><div class="modal-card order-modal-card"><div class="modal-header"><div><span class="kicker">Detalhes do pedido</span><h2 id="order-modal-title">Pedido</h2></div><button class="icon-button" data-close-order-modal>✕</button></div><div id="order-modal-content"></div><div class="modal-actions"><select id="order-status-select"><option value="novo">Novo</option><option value="confirmado">Confirmado</option><option value="separando">Separando</option><option value="enviado">Enviado</option><option value="entregue">Entregue</option><option value="cancelado">Cancelado</option></select><button id="save-order-status" class="primary-button">Atualizar status</button></div></div></div>
+
+
+  <div id="new-order-modal" class="modal" hidden><div class="modal-backdrop" data-close-new-order></div><form id="new-order-form" class="modal-card order-modal-card"><div class="modal-header"><div><span class="kicker">Atendimento presencial</span><h2>Novo pedido</h2></div><button type="button" class="icon-button" data-close-new-order>✕</button></div><div class="form-grid"><label><span>Nome do cliente</span><input id="manual-customer-name" required></label><label><span>Telefone</span><input id="manual-customer-phone" inputmode="numeric" placeholder="(88) 99999-9999"></label><label><span>Forma de pagamento</span><select id="manual-payment"><option value="pix">Pix</option><option value="cartao">Cartão</option><option value="dinheiro">Dinheiro</option><option value="outro">Outro</option></select></label><label><span>Status inicial</span><select id="manual-status"><option value="confirmado">Confirmado</option><option value="novo">Novo</option><option value="entregue">Entregue</option></select></label></div><div class="manual-order-products"><div class="manual-order-head"><div><h3>Produtos</h3><p>O estoque será descontado ao salvar.</p></div><button id="add-manual-item" type="button" class="secondary-button">+ Adicionar produto</button></div><div id="manual-order-items"></div></div><div class="manual-order-total"><span>Total do pedido</span><strong id="manual-order-total">R$ 0,00</strong></div><p id="manual-order-message" class="form-message"></p><div class="modal-actions"><button type="button" class="ghost-button" data-close-new-order>Cancelar</button><button id="save-manual-order" class="primary-button" type="submit">Salvar pedido</button></div></form></div>
+
+  <div id="finance-modal" class="modal" hidden><div class="modal-backdrop" data-close-finance-modal></div><form id="finance-form" class="modal-card"><div class="modal-header"><div><span class="kicker">Financeiro</span><h2 id="finance-modal-title">Nova movimentação</h2></div><button type="button" class="icon-button" data-close-finance-modal>✕</button></div><div class="form-grid">
+    <label><span>Tipo</span><select id="finance-type" required><option value="entrada">Entrada</option><option value="saida">Saída</option><option value="investimento">Investimento</option></select></label>
+    <label><span>Categoria</span><select id="finance-category" required></select></label>
+    <label class="full"><span>Descrição</span><input id="finance-description" required placeholder="Ex.: Compra de nova coleção"></label>
+    <label><span>Valor</span><input id="finance-value" type="number" min="0.01" step="0.01" required></label>
+    <label><span>Data</span><input id="finance-date" type="date" required></label>
+    <label><span>Forma de pagamento</span><select id="finance-payment"><option value="pix">Pix</option><option value="dinheiro">Dinheiro</option><option value="cartao">Cartão</option><option value="boleto">Boleto</option><option value="transferencia">Transferência</option><option value="outro">Outro</option></select></label>
+    <label><span>Status</span><select id="finance-status"><option value="pago">Pago/Recebido</option><option value="pendente">Pendente</option></select></label>
+    <label class="full"><span>Observações</span><textarea id="finance-notes" rows="3" placeholder="Informações adicionais..."></textarea></label>
+  </div><p id="finance-form-message" class="form-message"></p><div class="modal-actions"><button type="button" class="ghost-button" data-close-finance-modal>Cancelar</button><button id="save-finance-button" class="primary-button" type="submit">Salvar movimentação</button></div></form></div>
+  <div id="toast-container" class="toast-container"></div>
+  <script type="module" src="../js/admin.js"></script>
+</body>
+</html>

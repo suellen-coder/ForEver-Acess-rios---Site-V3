@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Display:wght@500;600;700&display=swap');
+
+:root {
+    --bg: #f5f1f0;
+    --surface: #ffffff;
+    --surface-2: #faf7f6;
+    --text: #30110f;
+    --muted: #806b69;
+    --border: #e6d9d7;
+    --primary: #5a100c;
+    --primary-hover: #731914;
+    --primary-soft: #f2e3e1;
+    --success: #277a51;
+    --danger: #b43e38;
+    --shadow: 0 18px 50px rgba(55, 10, 7, .09);
+    --radius: 18px;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+label {
+    font-family: "Inter", sans-serif;
+    text-transform: none;
+}
+
+body {
+    background:
+        radial-gradient(circle at 100% 0, var(--primary-soft), transparent 30%),
+        var(--bg);
+    color: var(--text);
+}
+
+h1,
+h2,
+h3 {
+    font-family: "Noto Serif Display", serif;
+}
+
+.checkout-header {
+    min-height: 82px;
+    padding: 16px max(4%, calc((100% - 1150px) / 2));
+    gap: 24px;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+    background: var(--primary);
+    box-shadow: 0 10px 30px rgba(55, 10, 7, .14);
+}
+
+.checkout-header h1 {
+    font-size: 1.65rem;
+}
+
+.checkout-back {
+    padding: 9px 12px;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 10px;
+    color: rgba(255,255,255,.8);
+    font-weight: 600;
+}
+
+.checkout-back:hover {
+    color: #fff;
+    background: rgba(255,255,255,.1);
+    opacity: 1;
+}
+
+.checkout-container {
+    width: min(1150px, 92%);
+    margin: 42px auto 70px;
+    gap: 22px;
+}
+
+.checkout-form-section,
+.order-summary {
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+}
+
+.checkout-form-section h2,
+.order-summary h2 {
+    margin-bottom: 24px;
+    color: var(--text);
+    font-size: 1.55rem;
+}
+
+.form-group label,
+.delivery-options legend {
+    color: var(--text);
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.form-group input,
+.form-group select {
+    min-height: 49px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    background: var(--surface-2);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.delivery-option {
+    padding: 15px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface-2);
+}
+
+.delivery-option:hover {
+    border-color: #d7bfbc;
+}
+
+.delivery-option:has(input:checked) {
+    border-color: var(--primary);
+    background: var(--primary-soft);
+    box-shadow: 0 0 0 2px rgba(90, 16, 12, .06);
+}
+
+.delivery-option input {
+    accent-color: var(--primary);
+}
+
+.delivery-option small,
+.checkout-product-info p {
+    color: var(--muted);
+    opacity: 1;
+}
+
+.delivery-notice {
+    border-left-color: var(--primary);
+    border-radius: 10px;
+    color: var(--muted);
+    background: var(--primary-soft);
+}
+
+.whatsapp-button,
+.empty-order a {
+    min-height: 48px;
+    border-radius: 12px;
+    color: #fff;
+    background: var(--primary);
+    font-size: .86rem;
+    font-weight: 700;
+    text-transform: none;
+}
+
+.whatsapp-button:hover:not(:disabled),
+.empty-order a:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.checkout-product {
+    padding: 15px 0;
+    border-color: var(--border);
+}
+
+.checkout-product img {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface-2);
+}
+
+.checkout-product-info h3 {
+    color: var(--text);
+    font-family: "Inter", sans-serif;
+    font-size: .84rem;
+    font-weight: 600;
+}
+
+.checkout-product-total,
+.summary-line,
+.summary-total {
+    color: var(--text);
+}
+
+.summary-total {
+    border-top-color: var(--primary);
+}
+
+.freight-message.success { color: var(--success); }
+.freight-message.error { color: var(--danger); }
+
+@media (max-width: 550px) {
+    .checkout-header {
+        min-height: auto;
+        padding: 17px 5%;
+    }
+
+    .checkout-container {
+        margin-top: 20px;
+    }
+
+    .checkout-form-section,
+    .order-summary {
+        padding: 21px 17px;
+        border-radius: 15px;
+    }
+}
+
+
+/* V2.1 — telefone e pagamento */
+.field-help {
+    display: block;
+    margin-top: 7px;
+    font-size: 0.76rem;
+    line-height: 1.4;
+    opacity: 0.72;
+    text-transform: none;
+}
+
+.payment-options {
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 560px) {
+    .payment-options .delivery-option {
+        align-items: flex-start;
+    }
+}

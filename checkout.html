@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Finalizar pedido</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="css/checkout-admin-theme.css">
+</head>
+
+<body>
+
+    <header class="checkout-header">
+        <a href="index.html" class="checkout-back">
+            ← Voltar ao catálogo
+        </a>
+
+        <h1>Finalizar pedido</h1>
+    </header>
+
+    <main class="checkout-container">
+
+        <section class="checkout-form-section">
+
+            <h2>Informações do cliente</h2>
+
+            <form id="checkout-form">
+
+                <div class="form-group">
+                    <label for="customer-name">
+                        Nome completo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customer-name"
+                        name="customerName"
+                        placeholder="Digite seu nome completo"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="customer-phone">
+                        Telefone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="customer-phone"
+                        name="customerPhone"
+                        placeholder="(85) 99999-9999"
+                        autocomplete="tel"
+                        inputmode="tel"
+                        minlength="10"
+                        maxlength="15"
+                        required
+                    >
+
+                    <small class="field-help">Usado apenas para contato e identificação no sistema.</small>
+                </div>
+
+                <fieldset class="delivery-options">
+
+                    <legend>Forma de recebimento</legend>
+
+                    <label class="delivery-option">
+                        <input
+                            type="radio"
+                            name="deliveryType"
+                            value="retirada"
+                            checked
+                        >
+
+                        <span>
+                            <strong>Retirada</strong>
+                            <small>Retirada no local</small>
+                        </span>
+                    </label>
+
+                    <label class="delivery-option">
+                        <input
+                            type="radio"
+                            name="deliveryType"
+                            value="entrega"
+                        >
+
+                        <span>
+                            <strong>Entrega</strong>
+                            <small>Disponível apenas no Crajubar</small>
+                        </span>
+                    </label>
+
+                </fieldset>
+
+                <div
+                    class="delivery-fields"
+                    id="delivery-fields"
+                    hidden
+                >
+
+                    <div class="form-group">
+                        <label for="customer-city">
+                            Cidade
+                        </label>
+
+                        <select
+                            id="customer-city"
+                            name="customerCity"
+                        >
+                            <option value="">
+                                Selecione sua cidade
+                            </option>
+
+                            <option value="Crato">
+                                Crato
+                            </option>
+
+                            <option value="Juazeiro do Norte">
+                                Juazeiro do Norte
+                            </option>
+
+                            <option value="Barbalha">
+                                Barbalha
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer-neighborhood">
+                            Bairro
+                        </label>
+
+                        <select
+                            id="customer-neighborhood"
+                            name="customerNeighborhood"
+                        >
+                            <option value="">
+                                Selecione um bairro
+                            </option>
+                        </select>
+
+                        <small
+                            class="freight-message"
+                            id="freight-message"
+                        ></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer-address">
+                            Endereço completo
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customer-address"
+                            name="customerAddress"
+                            placeholder="Rua, número e referência"
+                            autocomplete="street-address"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customer-complement">
+                            Complemento
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customer-complement"
+                            name="customerComplement"
+                            placeholder="Apartamento, bloco ou ponto de referência"
+                        >
+                    </div>
+
+                </div>
+
+                <fieldset class="delivery-options payment-options">
+
+                    <legend>Forma de pagamento</legend>
+
+                    <label class="delivery-option">
+                        <input type="radio" name="paymentMethod" value="Pix" checked>
+                        <span>
+                            <strong>Pix</strong>
+                            <small>Pagamento rápido e prático</small>
+                        </span>
+                    </label>
+                    
+                    <label class="delivery-option">
+                        <input type="radio" name="paymentMethod" value="Cartão de Crédito">
+                        <span>
+                            <strong>Cartão de Crédito</strong>
+                            <small>Parcelamento conforme disponibilidade</small>
+                        </span>
+                    </label>
+                    
+                    <label class="delivery-option">
+                        <input type="radio" name="paymentMethod" value="Cartão de Débito">
+                        <span>
+                            <strong>Cartão de Débito</strong>
+                            <small>Pagamento à vista</small>
+                        </span>
+                    </label>
+                    
+                    <label class="delivery-option">
+                        <input type="radio" name="paymentMethod" value="Dinheiro">
+                        <span>
+                            <strong>Dinheiro</strong>
+                            <small>Disponível para retirada ou entrega</small>
+                        </span>
+                    </label>
+                </fieldset>
+
+                <div class="delivery-notice">
+                    As entregas serão realizadas somente nas cidades de
+                    Crato, Juazeiro do Norte e Barbalha.
+                </div>
+
+                <button
+                    type="submit"
+                    class="whatsapp-button"
+                    id="whatsapp-button"
+                >
+                    Enviar pedido pelo WhatsApp
+                </button>
+
+            </form>
+
+        </section>
+
+        <aside class="order-summary">
+
+            <h2>Resumo do pedido</h2>
+
+            <div id="checkout-products"></div>
+
+            <div class="summary-values">
+
+                <div class="summary-line">
+                    <span>Subtotal</span>
+                    <strong id="checkout-subtotal">
+                        R$ 0,00
+                    </strong>
+                </div>
+
+                <div class="summary-line">
+                    <span>Entrega</span>
+                    <strong id="checkout-freight">
+                        R$ 0,00
+                    </strong>
+                </div>
+
+                <div class="summary-line summary-total">
+                    <span>Total</span>
+                    <strong id="checkout-total">
+                        R$ 0,00
+                    </strong>
+                </div>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+    <script type="module" src="js/checkout.js"></script>
+
+</body>
+</html>
